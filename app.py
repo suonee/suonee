@@ -51,6 +51,14 @@ def main():
     # Load the Excel data
     try:
         excel_data = pd.read_excel('data.xlsx')
+
+        # Convert columns to numeric, coercing errors to handle non-numeric data
+        excel_data['High'] = pd.to_numeric(excel_data['High'], errors='coerce')
+        excel_data['Bottom'] = pd.to_numeric(
+            excel_data['Bottom'], errors='coerce')
+        excel_data['ATH'] = pd.to_numeric(excel_data['ATH'], errors='coerce')
+        excel_data['ATL'] = pd.to_numeric(excel_data['ATL'], errors='coerce')
+
     except Exception as e:
         st.error(f"Error loading Excel data: {e}")
         return
